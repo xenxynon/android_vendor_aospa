@@ -19,6 +19,7 @@ PRODUCT_PACKAGES += \
     AOSPAImmersiveNavigationOverlay \
     AOSPANetworkStackOverlay \
     AOSPANetworkStackMainlineOverlay \
+    AOSPANotchBarKillerOverlay \
     AOSPASettingsOverlay \
     AOSPASettingsProviderOverlay \
     AOSPASystemUIOverlay \
