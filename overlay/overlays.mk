@@ -29,6 +29,7 @@ PRODUCT_PACKAGES += \
     FontManropeOverlay \
     FontOnePlusSansOverlay  \
     FontOppoSansOverlay \
+    FontPingFangOverlay \
     FontUrbanistOverlay \
     IconPackCircularAndroidOverlay \
     IconPackCircularLauncherOverlay \
