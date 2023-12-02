@@ -23,6 +23,7 @@ PRODUCT_PACKAGES += \
     AOSPASettingsOverlay \
     AOSPASettingsProviderOverlay \
     AOSPASystemUIOverlay \
+    CertifiedPropsOverlay \
     FontGoogleSansOverlay \
     FontHarmonySansOverlay \
     FontInterOverlay \
