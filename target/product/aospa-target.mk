@@ -19,9 +19,15 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
 # Some CTS test case failed after enabling feature config_stopSystemPackagesByDefault
 PRODUCT_PACKAGES += initial-package-stopped-states-aosp.xml
 
-# Abstruct
-PRODUCT_PACKAGES += \
-    Abstruct
+# Blurs
+ifeq ($(TARGET_ENABLE_BLUR), true)
+PRODUCT_PRODUCT_PROPERTIES += \
+    ro.sf.blurs_are_expensive=1 \
+    ro.surface_flinger.supports_background_blur=1
+endif
+
+# Boot Animation
+$(call inherit-product, vendor/aospa/bootanimation/bootanimation.mk)
 
 # AOSPA Version.
 $(call inherit-product, vendor/aospa/target/product/version.mk)
@@ -39,9 +45,6 @@ endif
 # Increase volume level steps
 PRODUCT_SYSTEM_PROPERTIES += \
     ro.config.media_vol_steps=30
-
-# Boot Animation
-$(call inherit-product, vendor/aospa/bootanimation/bootanimation.mk)
 
 # Camera
 PRODUCT_PACKAGES += \
@@ -137,7 +140,6 @@ $(call inherit-product-if-exists, vendor/aospa/translations/translations.mk)
 
 # Paranoid Packages
 PRODUCT_PACKAGES += \
-    ParanoidPapers \
     ParanoidSystemUI \
     ParanoidThemePicker
 
@@ -245,7 +247,14 @@ PRODUCT_PACKAGES += \
     libtextclassifier_annotator_en_model \
     libtextclassifier_annotator_universal_model \
     libtextclassifier_actions_suggestions_universal_model \
-    libtextclassifier_lang_id_model
+    libtextclassifier_lang_id_model \
+
+# Updater
+PRODUCT_PACKAGES += \
+    Updater \
+    update_engine \
+    update_verifier \
+    update_engine_sideload
 
 # Volume panel dialog - SystemUI
 PRODUCT_SYSTEM_EXT_PROPERTIES += \
