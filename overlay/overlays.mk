@@ -23,6 +23,8 @@ PRODUCT_PACKAGES += \
     AOSPASettingsOverlay \
     AOSPASettingsProviderOverlay \
     AOSPASystemUIOverlay \
+    BrightnessSliderFilledOverlay \
+    BrightnessSliderThinOverlay \
     CertifiedPropsOverlay \
     FontGoogleSansOverlay \
     FontHarmonySansOverlay \
