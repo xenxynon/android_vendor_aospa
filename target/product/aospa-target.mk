@@ -48,7 +48,7 @@ PRODUCT_SYSTEM_PROPERTIES += \
 
 # Camera
 PRODUCT_PACKAGES += \
-    Aperture
+    GoogleCameraGo
 
 # curl
 PRODUCT_PACKAGES += \
