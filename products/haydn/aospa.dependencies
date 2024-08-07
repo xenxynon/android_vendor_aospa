@@ -75,14 +75,14 @@
         "clone-depth":  "1"
     },
     {
-        "remote": "gitlab"
+        "remote": "gitlab",
         "repository": "Alucard_Storm/haydn-miuicamera",
         "target_path": "vendor/xiaomi/haydn-miuicamera",
         "revision": "fourteen-leica",
         "clone-depth":  "1"   
     },
     {
-        "remote": "gitlab"
+        "remote": "gitlab",
         "repository": "Alucard_Storm/vendor_xiaomi_haydn-firmware",
         "target_path": "vendor/xiaomi/haydn-firmware",
         "revision": "thirteen",
