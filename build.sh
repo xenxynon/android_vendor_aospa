@@ -186,6 +186,10 @@ AOSPA_VERSION="$(get_build_var AOSPA_VERSION)"
 checkExit
 echo -e ""
 
+# Custom Vars
+export OTA_FILE="PenguinOS-$AOSPA_VERSION.zip" 
+export UTCSTAMP="$(get_build_var ro.build.date.utc)"
+
 # Perform installclean, if requested so
 if [ "$FLAG_INSTALLCLEAN_BUILD" = 'y' ]; then
 	echo -e "${CLR_BLD_BLU}Cleaning compiled image files left from old builds${CLR_RST}"
@@ -226,7 +230,14 @@ elif [ "${KEY_MAPPINGS}" ]; then
         --block ${INCREMENTAL} \
         PenguinOS-$AOSPA_VERSION-signed-target_files-$FILE_NAME_TAG.zip \
         PenguinOS-$AOSPA_VERSION.zip
-
+    	 if [ -z "$FLAG_IMG_ZIP" ]; then
+	    IMG_SIZE=$(ls -nl "$OTA_FILE" | awk '{print $5}')
+            IMG_SHA256=$(sha256sum "$OTA_FILE" | awk '{print $1}')
+	    echo ""
+            echo "${CLR_BLD_GRN}SIZE:${CLR_RST} $IMG_SIZE bytes, ${CLR_BLD_GRN}SHA256:${CLR_RST} $IMG_SHA256 ${CLR_BLD_GRN} BUILD STAMP:${CLR_RST}: $UTCSTAMP" 
+	 fi
+  
+  
     checkExit
 
     if [ "$DELTA_TARGET_FILES" ]; then
@@ -247,8 +258,15 @@ elif [ "${KEY_MAPPINGS}" ]; then
         img_from_target_files \
             PenguinOS-$AOSPA_VERSION-signed-target_files-$FILE_NAME_TAG.zip \
             PenguinOS-$AOSPA_VERSION-image.zip
-        checkExit
+	    IMG_SIZE=$(ls -nl "$OTA_FILE" | awk '{print $5}')
+            IMG_SHA256=$(sha256sum "$OTA_FILE" | awk '{print $1}')
+	    echo ""
+	    echo "${CLR_BLD_GRN}Fastboot Zip:${CLR_RST} PenguinOS-$AOSPA_VERSION-img.zip"
+	    echo "${CLR_BLD_GRN}OTA zip Complete:${CLR_RST} PenguinOS-$AOSPA_VERSION.zip${CLR_RST}"
+            echo "${CLR_BLD_GRN}SIZE:${CLR_RST} $IMG_SIZE bytes, ${CLR_BLD_GRN}SHA256:${CLR_RST} $IMG_SHA256 ${CLR_BLD_GRN}BUILD STAMP:${CLR_RST}: $UTCSTAMP"
+     checkExit
     fi
+
 # Build rom package
 elif [ "$FLAG_IMG_ZIP" = 'y' ]; then
     m otatools target-files-package "$CMD"
@@ -279,7 +297,7 @@ else
 fi
 echo -e ""
 
-# Check the finishing time
+# Check the finishing timestamp
 TIME_END=$(date +%s.%N)
 
 # Log those times at the end as a fun fact of the day

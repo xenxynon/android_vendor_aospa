@@ -19,6 +19,13 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
 # Some CTS test case failed after enabling feature config_stopSystemPackagesByDefault
 PRODUCT_PACKAGES += initial-package-stopped-states-aosp.xml
 
+-include vendor/custom/stuff/copy.mk
+
+SIGNING_KEY_PATH ?= certs
+RELEASE_KEY := $(SIGNING_KEY_PATH)/releasekey
+PRODUCT_DEFAULT_DEV_CERTIFICATE := $(RELEASE_KEY)
+PRODUCT_OTA_PUBLIC_KEYS := $(RELEASE_KEY)
+
 # Blurs
 ifeq ($(TARGET_ENABLE_BLUR), true)
 PRODUCT_PRODUCT_PROPERTIES += \
@@ -46,7 +53,7 @@ endif
 TARGET_CALL_RECORDING_SUPPORTED ?= true
 ifneq ($(TARGET_CALL_RECORDING_SUPPORTED),false)
 PRODUCT_COPY_FILES += \
-    vendor/blaze/config/permissions/com.google.android.apps.dialer.call_recording_audio.features.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/com.google.android.apps.dialer.call_recording_audio.features.xml
+    vendor/aospa/target/config/permissions/com.google.android.apps.dialer.call_recording_audio.features.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/com.google.android.apps.dialer.call_recording_audio.features.xml
 endif
 
 
